@@ -22,11 +22,14 @@ module.exports = {
           to: { height: "0" },
         },
       },
+      boxShadow: {
+        autofill: "inset 0 0 0px 1000px #09090B",
+      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-text-fill")],
 };
