@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html,body, #root {
-    @apply h-full;
+html,
+body,
+#root {
+  @apply h-full;
 }
 
 body {
-    @apply bg-zinc-950 text-white;
+  @apply bg-zinc-950 text-white;
 }
 
 /* Стилизация полей ввода при автозаполнении */
@@ -16,5 +18,5 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:active,
 input:-webkit-autofill:focus {
-    @apply autofill:text-fill-white autofill:shadow-autofill bg-zinc-950;
+  @apply autofill:text-fill-white autofill:shadow-autofill bg-zinc-950;
 }

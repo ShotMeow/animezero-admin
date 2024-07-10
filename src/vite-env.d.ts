@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly ADMIN_USERNAME: string;
-  readonly ADMIN_PASSWORD: string;
+  readonly VITE_ADMIN_USERNAME: string;
+  readonly VITE_ADMIN_PASSWORD: string;
 }
 
 interface ImportMeta {

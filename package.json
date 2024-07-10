@@ -1,6 +1,6 @@
 {
   "name": "animezero-admin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Admin release for online anime cinema developed on Vite & React.js",
   "author": "Kai Goldman",
   "type": "module",
@@ -19,8 +19,10 @@
     "format"
   ],
   "dependencies": {
+    "next-themes": "^0.3.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sonner": "^1.5.0"
   },
   "devDependencies": {
     "@tanstack/react-router": "^1.44.1",
