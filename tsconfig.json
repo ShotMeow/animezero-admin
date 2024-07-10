@@ -3,9 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "references": [
@@ -15,5 +13,5 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ],
+  ]
 }
