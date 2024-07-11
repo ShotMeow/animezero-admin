@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   beforeLoad: ({ context }) => {
-    if (!context.auth)
+    if (!context.user || context.user?.role === "user")
       throw redirect({
         to: "/login",
       });

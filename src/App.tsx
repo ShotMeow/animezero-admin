@@ -5,13 +5,13 @@ import { useAuthContext } from "@/features/auth/context.ts";
 const router = createRouter({
   routeTree,
   context: {
-    auth: undefined,
+    user: undefined,
   },
 });
 
 const App = () => {
-  const { isAuth } = useAuthContext();
-  return <RouterProvider router={router} context={{ auth: isAuth }} />;
+  const { user } = useAuthContext();
+  return <RouterProvider router={router} context={{ user }} />;
 };
 
 export default App;

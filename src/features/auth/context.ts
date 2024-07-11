@@ -1,13 +1,19 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 
+export interface UserType {
+  userId: number;
+  name: string;
+  role: "user" | "admin" | "owner";
+}
+
 interface AuthContextType {
-  isAuth: boolean;
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  user: UserType | undefined;
+  setUser: Dispatch<SetStateAction<UserType | undefined>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
-  isAuth: false,
-  setIsAuth: () => {},
+  user: undefined,
+  setUser: () => {},
 });
 
 export const useAuthContext = (): AuthContextType => {

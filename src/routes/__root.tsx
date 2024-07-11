@@ -2,9 +2,10 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import DotPattern from "@/components/ui/dot-pattern.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Toaster } from "@/components/ui/sonner.tsx";
+import { UserType } from "@/features/auth/context.ts";
 
 type RouterContext = {
-  auth: boolean | undefined;
+  user: UserType | undefined;
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({

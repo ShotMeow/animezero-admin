@@ -1,45 +1,56 @@
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { toast } from "sonner";
-import type { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { useAuthContext } from "@/features/auth/context.ts";
+import { useAuthContext, UserType } from "@/features/auth/context.ts";
 import BlurryBlob from "@/components/ui/blurry-blob.tsx";
+import { gql, useMutation } from "@apollo/client";
+import { toast } from "sonner";
+import { jwtDecode } from "jwt-decode";
 
 export const Route = createLazyFileRoute("/login")({
   component: LoginPage,
 });
 
-const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+const SIGN_IN_MUTATION = gql(`
+  mutation signInMutation($name: String!, $password: String!) {
+    signIn(user: { name: $name, password: $password }) {
+      token
+    }
+  }
+`);
 
 function LoginPage() {
-  const navigate = useNavigate({ from: "/" });
-  const { setIsAuth } = useAuthContext();
+  const [signIn] = useMutation(SIGN_IN_MUTATION);
+  const { user, setUser } = useAuthContext();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
     const username = formData.get("username");
     const password = formData.get("password");
 
-    if (ADMIN_USERNAME === username && password === ADMIN_PASSWORD) {
-      setIsAuth(true);
-      setTimeout(
-        () =>
-          void navigate({
-            to: "/",
-          }),
-      );
-    } else {
+    try {
+      const response = await signIn({
+        variables: { name: username, password: password },
+      });
+
+      const decodedToken: UserType = jwtDecode(response.data.signIn.token);
+      setUser(decodedToken);
+    } catch (error) {
       toast.error("Ошибка", {
-        description: "Имя пользователя или пароль не правильные.",
+        description: "Имя пользователя или пароль не верны.",
       });
     }
   };
+
+  useEffect(() => {
+    user?.role !== "user" && navigate({ to: "/" });
+  }, [navigate, user]);
 
   return (
     <div className="flex h-full items-center justify-center py-12">
