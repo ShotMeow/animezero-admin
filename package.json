@@ -1,6 +1,6 @@
 {
   "name": "animezero-admin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Admin release for online anime cinema developed on Vite & React.js",
   "author": "Kai Goldman",
   "type": "module",

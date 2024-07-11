@@ -25,7 +25,7 @@ function LoginPage() {
 
     const username = formData.get("username");
     const password = formData.get("password");
-    console.log(username, password, ADMIN_USERNAME, ADMIN_PASSWORD);
+
     if (ADMIN_USERNAME === username && password === ADMIN_PASSWORD) {
       setIsAuth(true);
       setTimeout(
