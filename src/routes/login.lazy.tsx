@@ -6,6 +6,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { useAuthContext } from "@/features/auth/context.ts";
+import BlurryBlob from "@/components/ui/blurry-blob.tsx";
 
 export const Route = createLazyFileRoute("/login")({
   component: LoginPage,
@@ -63,6 +64,11 @@ function LoginPage() {
           </Button>
         </form>
       </div>
+      <BlurryBlob
+        className="rounded-xl opacity-45"
+        firstBlobColor="bg-purple"
+        secondBlobColor="bg-purple/20"
+      />
     </div>
   );
 }

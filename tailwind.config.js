@@ -21,6 +21,19 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "pop-blob": {
+          "0%": { transform: "scale(1)" },
+          "33%": { transform: "scale(1.2)" },
+          "66%": { transform: "scale(0.9)" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      colors: {
+        purple: "#643FFE",
+        filter: {
+          "blur-20": "blur(20px)",
+          "blur-25": "blur(25px)",
+        },
       },
       boxShadow: {
         autofill: "inset 0 0 0px 1000px #09090B",
@@ -28,6 +41,7 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "pop-blob": "pop-blob 3s linear infinite",
       },
     },
   },
