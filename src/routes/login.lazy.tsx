@@ -1,5 +1,5 @@
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
@@ -9,6 +9,7 @@ import BlurryBlob from "@/components/ui/blurry-blob.tsx";
 import { gql, useMutation } from "@apollo/client";
 import { toast } from "sonner";
 import { jwtDecode } from "jwt-decode";
+import { Loader2 } from "lucide-react";
 
 export const Route = createLazyFileRoute("/login")({
   component: LoginPage,
@@ -23,6 +24,7 @@ const SIGN_IN_MUTATION = gql(`
 `);
 
 function LoginPage() {
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [signIn] = useMutation(SIGN_IN_MUTATION);
   const { user, setUser } = useAuthContext();
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ function LoginPage() {
     const password = formData.get("password");
 
     try {
+      setIsPending(true);
       const response = await signIn({
         variables: { name: username, password: password },
       });
@@ -45,6 +48,8 @@ function LoginPage() {
       toast.error("Ошибка", {
         description: "Имя пользователя или пароль не верны.",
       });
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -70,8 +75,15 @@ function LoginPage() {
             <Label htmlFor="password">Пароль</Label>
             <Input id="password" type="password" name="password" required />
           </div>
-          <Button type="submit" className="w-full">
-            Войти
+          <Button disabled={isPending} type="submit" className="w-full">
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 size-4 animate-spin" />
+                Загрузка...
+              </>
+            ) : (
+              "Войти"
+            )}
           </Button>
         </form>
       </div>
