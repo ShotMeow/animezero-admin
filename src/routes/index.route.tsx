@@ -19,11 +19,5 @@ function AdminPanelPage() {
     });
   }, []);
 
-  return (
-    <div className="pt-10">
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight">
-        Админ-панель
-      </h2>
-    </div>
-  );
+  return <div className="px-4 py-2"></div>;
 }
