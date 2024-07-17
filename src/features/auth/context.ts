@@ -1,9 +1,16 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 
+export enum Role {
+  USER = "user",
+  ADMIN = "admin",
+  OWNER = "owner",
+}
+
 export interface UserType {
   userId: number;
   name: string;
-  role: "user" | "admin" | "owner";
+  avatarUrl?: string;
+  role: Role;
 }
 
 interface AuthContextType {

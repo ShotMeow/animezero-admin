@@ -1,5 +1,5 @@
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { toast } from "sonner";
 import { jwtDecode } from "jwt-decode";
@@ -12,8 +12,9 @@ import { DotPattern } from "@/components/ui/dot-pattern.tsx";
 
 import { useAuthContext, UserType } from "@/features/auth/context.ts";
 import { cn } from "@/lib/utils.ts";
+import BlurryBlob from "@/components/ui/blurry-blob.tsx";
 
-export const Route = createLazyFileRoute("/login")({
+export const Route = createLazyFileRoute("/")({
   component: LoginPage,
 });
 
@@ -53,11 +54,11 @@ function LoginPage() {
     } finally {
       setIsPending(false);
     }
-  };
 
-  useEffect(() => {
-    user?.role !== "user" && navigate({ to: "/" });
-  }, [navigate, user]);
+    setTimeout(() => {
+      user?.role !== "user" && navigate({ to: "/dashboard" });
+    });
+  };
 
   return (
     <div className="grid h-full lg:grid-cols-2">
@@ -91,7 +92,7 @@ function LoginPage() {
           </form>
         </div>
       </div>
-      <div className="relative flex items-center justify-center bg-zinc-900 py-6">
+      <div className="relative flex items-center justify-center overflow-hidden bg-zinc-900 py-6 max-lg:hidden">
         <DotPattern
           cx={1}
           cy={1}
@@ -108,9 +109,10 @@ function LoginPage() {
             "hidden lg:block [mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] z-10",
           )}
         />
-        <p className="text-6xl font-bold">
+        <p className="z-10 text-6xl font-bold">
           Anime<span className="text-purple">Zero</span>
         </p>
+        <BlurryBlob firstBlobColor="bg-purple" secondBlobColor="bg-white" />
       </div>
     </div>
   );

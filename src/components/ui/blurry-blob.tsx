@@ -12,7 +12,7 @@ export default function BlurryBlob({
   secondBlobColor,
 }: BlobProps) {
   return (
-    <div className="absolute -z-10 min-h-52 min-w-52">
+    <div className="absolute min-h-52 min-w-52">
       <div className="relative w-full max-w-lg">
         <div
           className={cn(
